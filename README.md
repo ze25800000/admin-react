@@ -112,3 +112,142 @@ ReactDOM.render(
     document.getElementById('app')
 )
 ```
+
+## 4-4 Webpack配置（2）
+##### [ExtractTextWebpackPlugin](https://webpack.js.org/plugins/extract-text-webpack-plugin/#src/components/Sidebar/Sidebar.jsx)
+
+- Install
+```
+yarn add extract-text-webpack-plugin@3.0.2 --dev
+```
+- Usage
+```
+module: {
+rules: [
+  {
+    test: /\.css$/,
+    use: ExtractTextPlugin.extract({
+      fallback: "style-loader",
+      use: "css-loader"
+    })
+  }
+]
+},
+plugins: [
+    new ExtractTextPlugin("styles.css"),
+]
+```
+##### [sass-loader](https://webpack.js.org/loaders/sass-loader/#src/components/Sidebar/Sidebar.jsx)
+- Install
+```
+yarn add sass-loader@6.0.6 node-sass@4.7.2 --dev
+```
+- Usage
+```
+rules: [{
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: ["css-loader", "sass-loader"]
+        })
+    }]
+```
+
+##### [url-loader](https://webpack.js.org/loaders/url-loader/#src/components/Sidebar/Sidebar.jsx)
+- Install
+```
+yarn add file-loader@1.1.6 url-loader@0.6.2 --dev
+```
+- Usage
+```
+// 处理图片
+{
+    test: /\.(png|jpg|gif)$/,
+    use: [
+        {
+            loader: 'url-loader',
+            options: {
+                limit: 8192
+            }
+        }
+    ]
+}
+```
+##### [Font Awesome](http://fontawesome.dashgame.com/)
+- Install
+```
+yarn add font-awesom
+```
+- Usage
+```
+ // 处理字体图标
+{
+    test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+    use: [
+        {
+            loader: 'url-loader',
+            options: {
+                limit: 8192
+            }
+        }
+    ]
+}
+```
+##### 提出公共模块
+```
+// 提出公共模块
+new webpack.optimize.CommonsChunkPlugin({
+    name: "common",
+    filename: "js/base.js"
+})
+```
+
+```
+output: {
+    ...
+    filename: 'js/app.js'
+},
+```
+
+```
+options: {
+    ...
+    name: 'resource/[name].[ext]'
+}
+```
+
+##### [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server)
+- Install
+```
+yarn add  webpack-dev-server@2.9.7 --dev
+```
+- Usage
+```
+devServer: {
+     contentBase: './dist'
+},
+```
+- 配置publicPath
+```
+output: {
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/', // 配置publicPath
+    filename: 'js/app.js'
+}
+// 之后可以省略contentBase: './dist'
+devServer: {
+},
+```
+- 修改端口
+```
+devServer: {
+    port: 2300
+}
+```
+##### 配置package.json中的script
+```
+"scripts": {
+    "dev": "node_modules/.bin/webpack-dev-server",
+    "dist": "node_modules/.bin/webpack -p" // -p代表线上环境打包
+},
+```
