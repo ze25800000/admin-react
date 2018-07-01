@@ -1,13 +1,24 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import _mm from 'util/mm'
+import User from 'service/user-service'
 
 export default class Layout extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            username: _mm.getStorage('userInfo').username || ''
+        }
     }
 
-    onLogout() {
-
+    async onLogout() {
+        try {
+            await User.logout()
+            _mm.removeStorage('userInfo')
+            window.location.href = '/login'
+        } catch (e) {
+            _mm.errorTips(e)
+        }
     }
 
     render() {
@@ -21,7 +32,7 @@ export default class Layout extends Component {
                     <li className="dropdown">
                         <span className="dropdown-toggle" href="javascript:;" aria-expanded="false">
                             <i className="fa fa-user fa-fw"></i>
-                            <span>欢迎，adminxxx</span>
+                            <span>欢迎，{this.state.username}</span>
                             <i className="fa fa-caret-down"></i>
                         </span>
                         <ul className="dropdown-menu dropdown-user">

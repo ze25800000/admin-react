@@ -29,4 +29,11 @@ export default class User {
             msg: '验证通过'
         }
     }
+
+    static logout() {
+        return _mm.request({
+            url: "/user/logout.do",
+            type: 'post'
+        })
+    }
 }

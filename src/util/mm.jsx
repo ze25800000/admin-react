@@ -36,4 +36,28 @@ export default class MUtil {
     static errorTips(errMsg) {
         alert(errMsg || 'wrong')
     }
+
+    static setStorage(name, data) {
+        let dataType = typeof data
+        if (dataType === 'object') {
+            window.localStorage.setItem(name, JSON.stringify(data))
+        } else if (['number', 'string', 'boolean'].indexOf(dataType) >= 0) {
+            window.localStorage.setItem(name, data)
+        } else {
+            alert('类型不能存储')
+        }
+    }
+
+    static getStorage(name) {
+        let data = window.localStorage.getItem(name)
+        if (data) {
+            return JSON.parse(data)
+        } else {
+            return ''
+        }
+    }
+
+    static removeStorage(name) {
+        window.localStorage.removeItem(name)
+    }
 }

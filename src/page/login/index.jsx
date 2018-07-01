@@ -44,6 +44,7 @@ export default class Login extends Component {
         }
         try {
             let result = await User.login(loginInfo)
+            _mm.setStorage('userInfo', result)
             this.props.history.push(this.state.redirect)
         } catch (e) {
             _mm.errorTips(e)
