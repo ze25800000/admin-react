@@ -6,7 +6,7 @@ export default class MUtil {
                 url: param.url || '',
                 dataType: param.dataType || 'json',
                 data: param.data || null,
-                success(res) {
+                success: (res) => {
                     if (0 === res.status) {
                         resolve(res.data, res.msg)
                     } else if (10 === res.status) {
@@ -15,14 +15,14 @@ export default class MUtil {
                         reject(res.msg || res.data)
                     }
                 },
-                error(err) {
+                error: (err) => {
                     reject(err.statusText)
                 }
             })
         })
     }
 
-    doLogin() {
+    static doLogin() {
         window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname)
     }
 

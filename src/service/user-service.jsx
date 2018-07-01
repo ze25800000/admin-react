@@ -30,6 +30,16 @@ export default class User {
         }
     }
 
+    static getUserList(pageNum) {
+        return _mm.request({
+            type: 'post',
+            url: '/manage/user/list.do',
+            data: {
+                pageNum
+            }
+        })
+    }
+
     static logout() {
         return _mm.request({
             url: "/user/logout.do",
