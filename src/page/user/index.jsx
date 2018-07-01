@@ -9,7 +9,9 @@ export default class UserList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            pageNum: 1
+            list: [],
+            pageNum: 1,
+            firstLoading: true
         }
     }
 
@@ -20,13 +22,43 @@ export default class UserList extends Component {
     async loadUserList() {
         try {
             let result = await User.getUserList(this.state.pageNum)
-            this.setState(result)
+            this.setState(result, () => {
+                this.setState({
+                    firstLoading: false
+                })
+            })
         } catch (e) {
+            this.setState({
+                list: []
+            })
             _mm.errorTips(e)
         }
     }
 
+    onPageNumChange(pageNum) {
+        this.setState({
+            pageNum
+        }, () => {
+            this.loadUserList()
+        })
+    }
+
     render() {
+        let listBody = this.state.list.length > 0 ?
+            this.state.list.map((user, index, arr) => {
+                return (
+                    <tr>
+                        <td>{user.id}</td>
+                        <td>{user.username}</td>
+                        <td>{user.email}</td>
+                        <td>{user.phone}</td>
+                        <td>{new Date(user.createTime).toLocaleString()}</td>
+                    </tr>
+                )
+            }) :
+            <tr>
+                <td colSpan={"5"} className={'text-center'}>{this.state.firstLoading ? "正在加载数据" : "没有找到相应的结果"}</td>
+            </tr>
         return (
             <div id="page-wrapper">
                 <PageTitle title={'用户列表'}/>
@@ -36,27 +68,20 @@ export default class UserList extends Component {
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>ID</th>
-                                <th>ID</th>
-                                <th>ID</th>
-                                <th>ID</th>
+                                <th>用户名</th>
+                                <th>邮箱</th>
+                                <th>电话</th>
+                                <th>注册时间</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>123</td>
-                                <td>123</td>
-                                <td>123</td>
-                                <td>123</td>
-                                <td>123</td>
-                            </tr>
+                            {listBody}
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <Pagination current={11} total={200} onChange={(pageNum) => {
-                    console.log(pageNum)
-                }}/>
+                <Pagination current={this.state.pageNum} total={this.state.total}
+                            onChange={(pageNum) => this.onPageNumChange(pageNum)}/>
             </div>
         )
     }
