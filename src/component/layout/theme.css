@@ -4,39 +4,25 @@ License: Commons Attribution 3.0
 http://creativecommons.org/licenses/by/3.0/
 ------------------------------------------------*/
 
-
 /*----------------------------------------------
     COMMON  STYLES
 ------------------------------------------------*/
 body {
     font-family: 'Open Sans', sans-serif;
+    background: #f3f3f3;
 }
 
 #wrapper {
     width: 100%;
-    background: #2b2e33;
 }
 
 #page-wrapper {
+    margin: 0 0 0 260px;
     padding: 15px 15px;
-    min-height: 600px;
-    background: #f3f3f3;
-}
-
-#page-inner {
-    width: 100%;
-    margin: 10px 20px 10px 0px;
-    background-color: transparent;
-    padding: 10px;
-    min-height: 1200px;
 }
 
 .text-center {
     text-align: center;
-}
-
-.no-boder {
-    border: 1px solid #f3f3f3;
 }
 
 h1, .h1, h2, .h2, h3, .h3 {
@@ -89,7 +75,10 @@ p {
     z-index: 1;
     position: fixed;
     width: 260px;
-    top: 80px;
+    top: 60px;
+    bottom: 0;
+    overflow-y: auto;
+    background-color: #2b2e22;
 }
 
 #page-wrapper {
@@ -115,6 +104,7 @@ p {
     /* background-color: #FAFAFA; */
     border-radius: 0;
 }
+
 /*----------------------------------------------
    DASHBOARD STYLES
 ------------------------------------------------*/
@@ -290,6 +280,7 @@ p {
     font-size: 16px;
     line-height: 30px;
 }
+
 /*CHAT PANEL*/
 /*Charts*/
 
@@ -369,17 +360,17 @@ p {
     color: #8d8888;
 }
 
-.chat-img>img {
+.chat-img > img {
     margin-left: 20px;
 }
 
 footer p {
     font-size: 14px;
 }
+
 /*----------------------------------------------
     MENU STYLES
 ------------------------------------------------*/
-
 
 .user-image {
     margin: 25px auto;
@@ -498,7 +489,7 @@ footer p {
     padding-left: 55px;
 }
 
-.sidebar-collapse , .sidebar-collapse .nav {
+.sidebar-collapse, .sidebar-collapse .nav {
     background: none;
 }
 
@@ -531,7 +522,6 @@ ul.nav.nav-second-level.collapse.in {
 
 .navbar-side {
     border: none;
-    background-color: transparent;
 }
 
 .top-navbar {
@@ -576,6 +566,7 @@ ul.nav.nav-second-level.collapse.in {
     margin-right: 10px;
     color: #666;
 }
+
 /*----------------------------------------------
     UI ELEMENTS STYLES
 ------------------------------------------------*/
@@ -595,28 +586,31 @@ ul.nav.nav-second-level.collapse.in {
     MEDIA QUERIES
 ------------------------------------------------*/
 
-@media(min-width:768px) {
-    #page-wrapper {
-        margin: 0 0 0 260px;
-        padding: 15px 30px;
-        min-height: 1200px;
+@media (max-width: 768px) {
+    .top-navbar {
+        position: relative;
+    }
+
+    .top-navbar .navbar-brand {
+        width: 100%;
     }
 
     .navbar-side {
         z-index: 1;
-        width: 260px;
+        width: 100%;
+        position: relative;
+        top: 0;
     }
 
     .navbar {
         border-radius: 0px;
     }
-}
 
-@media(max-width:480px) {
-    .page-header small {
-        display: block;
-        padding-top: 14px;
-        font-size: 19px;
+    #page-wrapper {
+        margin: 0;
+        top: 0;
+        padding: 15px 30px;
     }
+
 }
 
