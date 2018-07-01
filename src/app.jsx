@@ -6,6 +6,7 @@ import Layout from 'component/layout/index'
 // 页面
 import Home from 'page/home/index'
 import Login from 'page/login/index'
+import ErrorPage from 'page/error/index'
 
 class App extends Component {
     render() {
@@ -19,6 +20,7 @@ class App extends Component {
                                 <Route exact path='/' component={Home}/>
                                 <Route path='/product' component={Home}/>
                                 <Route path='/product.category' component={Home}/>
+                                <Route component={ErrorPage}/>
                             </Switch>
                         </Layout>
                     )}/>
