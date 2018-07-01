@@ -418,3 +418,23 @@ resolve: {
     ....
 },
 ```
+# 6-2 通用布局的开发(1)
+# 7-3 登录页面的开发（2）
+##### 配置webpack
+- proxy
+```
+proxy: {
+    '/manage': {
+        target: "http://admintest.happymmall.com",
+        changeOrigin: true
+    }
+}
+```
+- 支持es7语法
+```
+yarn add babel-preset-stage-3 npm install babel-polyfill
+
+entry: ['babel-polyfill', './src/app.jsx']
+
+bable的presets设置为 presets: ['env', 'stage-3', 'react']
+```
