@@ -251,3 +251,144 @@ devServer: {
     "dist": "node_modules/.bin/webpack -p" // -p代表线上环境打包
 },
 ```
+## 5-6 Router原理及React-router
+##### 路由的几种方式
+- 页面路由
+```
+window.location.href="http://www.baidu.com"
+```
+- hash 路由
+```
+window.location="#hash"
+window.onhashchange=function(){
+	console.log('current hash:',window.location.hash)
+}
+
+onhashchange()
+//current hash: #hash
+```
+- h5 路由
+```
+// 推进一个路由
+history.pushState('name','title','/path')
+// 替换一个路由
+history.replaceState('name','title','/path')
+
+// popstate
+window.onpopstate=function(){
+    console.log(window.location.href)
+    console.log(window.location.pathname)
+    console.log(window.location.hash)
+    console.log(window.location.search)
+}
+```
+
+##### React-Router
+- 路由方式
+```
+<BrowserRouter/> // h5路由实现
+
+<HashRouter/> // hash方式实现
+
+<Router> // 路由规则
+
+<Switch> // 路由选项
+
+<Link/> <NavLink> // 跳转导航
+
+<Redirect> 自动跳转
+```
+- Install[REACT ROUTER](https://reacttraining.com/react-router/core/guides/philosophy)
+```
+yarn add react-router-dom@4.2.2
+
+```
+- Usage
+```
+import React, {Component} from 'react'
+import ReactDOM from 'react-dom'
+//BrowserRouter as Router 、HashRouter as Router
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+
+class A extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
+    render() {
+        return <div>
+            Component A
+        </div>
+    }
+}
+
+class B extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
+    render() {
+        return <div>
+            Component B
+        </div>
+    }
+}
+
+class Wrapper extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
+    render() {
+        return <div>
+            <Link to="/a">组件A</Link>
+            <br/>
+            <Link to="/b">组件B</Link>
+            {this.props.children}
+        </div>
+    }
+}
+
+ReactDOM.render(
+    <Router>
+        <Wrapper>
+            <Route path="/a" component={A}/>
+            <Route path="/b" component={B}/>
+        </Wrapper>
+    </Router>,
+    document.getElementById('app')
+)
+
+```
+- 参数的传递
+```
+<Link to="/a/123">带参数的组件A</Link>
+
+....
+<Route path="/a" component={A}/>
+
+....
+接收的参数是：{this.props.match.params.id}
+
+```
+
+- Switch用法
+```
+<div>
+    Component A
+    <Switch>
+        <Route exact path={`${this.props.match.path}`} render={(route) => {
+            return <div>当前组件是不带参数的A</div>
+        }}/>
+        <Route path={`${this.props.match.path}/sub`} render={(route) => {
+            return <div>当前组件是Sub</div>
+        }}/>
+        <Route path={`${this.props.match.path}/:id`} render={(route) => {
+            return <div>当前组件是带参数的A, 参数是：{route.match.params.id}</div>
+        }}/>
+    </Switch>
+</div>
+```

@@ -19,7 +19,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['env', 'react']
+                        presets: ['env', 'react'] //env作为环境转换的工具 react->babel-preset-react
                     }
                 }
             },
