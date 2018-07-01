@@ -4,8 +4,9 @@ License: Commons Attribution 3.0
 http://creativecommons.org/licenses/by/3.0/
 ------------------------------------------------*/
 
+
 /*----------------------------------------------
-    COMMON  STYLES
+    COMMON  STYLES    
 ------------------------------------------------*/
 body {
     font-family: 'Open Sans', sans-serif;
@@ -18,12 +19,13 @@ body {
 
 #page-wrapper {
     margin: 0 0 0 260px;
-    padding: 15px 15px;
+    padding: 15px 30px;
 }
 
 .text-center {
     text-align: center;
 }
+
 
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 7px;
@@ -48,7 +50,6 @@ h4 {
 p {
     font-size: 16px;
     line-height: 25px;
-    padding-top: 20px;
 }
 
 .panel {
@@ -77,8 +78,8 @@ p {
     width: 260px;
     top: 60px;
     bottom: 0;
-    overflow-y: auto;
-    background-color: #2b2e22;
+    overflow-y : auto;
+    background: #2b2e33;
 }
 
 #page-wrapper {
@@ -101,12 +102,11 @@ p {
     padding: 0;
     margin-bottom: 20px;
     list-style: none;
-    /* background-color: #FAFAFA; */
+/* background-color: #FAFAFA; */
     border-radius: 0;
 }
-
 /*----------------------------------------------
-   DASHBOARD STYLES
+   DASHBOARD STYLES    
 ------------------------------------------------*/
 .page-header {
     padding-bottom: 9px;
@@ -280,8 +280,7 @@ p {
     font-size: 16px;
     line-height: 30px;
 }
-
-/*CHAT PANEL*/
+     /*CHAT PANEL*/
 /*Charts*/
 
 .main-chart {
@@ -360,17 +359,17 @@ p {
     color: #8d8888;
 }
 
-.chat-img > img {
+.chat-img>img {
     margin-left: 20px;
 }
 
 footer p {
     font-size: 14px;
 }
-
 /*----------------------------------------------
-    MENU STYLES
+    MENU STYLES    
 ------------------------------------------------*/
+
 
 .user-image {
     margin: 25px auto;
@@ -398,6 +397,7 @@ footer p {
 }
 
 .navbar-brand b {
+    margin-right:5px;
     color: #2DAFCB;
 }
 
@@ -405,7 +405,7 @@ footer p {
     position: relative;
     display: inline-block;
     margin: 0px;
-    padding: 0px;
+    padding: 0px 10px;
 }
 
 .top-navbar .nav > li > a {
@@ -422,11 +422,17 @@ footer p {
     background: transparent;
 }
 
+.top-navbar .nav > li:hover .dropdown-menu{
+    display: block;
+}
 .top-navbar .dropdown-menu {
     min-width: 230px;
+    top: 98%;
     border-radius: 0 0 4px 4px;
 }
-
+.dropdown-menu > li > a{
+    cursor: pointer;
+}
 .top-navbar .dropdown-menu > li > a:hover, .top-navbar .dropdown-menu > li > a:focus {
     color: #225081;
     background: none;
@@ -489,7 +495,7 @@ footer p {
     padding-left: 55px;
 }
 
-.sidebar-collapse, .sidebar-collapse .nav {
+.sidebar-collapse , .sidebar-collapse .nav {
     background: none;
 }
 
@@ -532,7 +538,10 @@ ul.nav.nav-second-level.collapse.in {
 .top-navbar .nav > li > a > i {
     margin-right: 2px;
 }
-
+.top-navbar .nav > li > a > span {
+    color: #666;
+    margin-right: 5px;
+}
 .top-navbar .navbar-brand:hover {
     color: #2DAFCB;
     background-color: rgb(43, 46, 51);
@@ -566,13 +575,12 @@ ul.nav.nav-second-level.collapse.in {
     margin-right: 10px;
     color: #666;
 }
-
 /*----------------------------------------------
-    UI ELEMENTS STYLES
+    UI ELEMENTS STYLES     
 ------------------------------------------------*/
 .btn-circle {
     width: 50px;
-    height: 50px;
+    height: 50px; 
     padding: 6px 0;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
@@ -583,17 +591,18 @@ ul.nav.nav-second-level.collapse.in {
 }
 
 /*----------------------------------------------
-    MEDIA QUERIES
+    MEDIA QUERIES     
 ------------------------------------------------*/
+ 
+@media(max-width:768px) {
 
-@media (max-width: 768px) {
-    .top-navbar {
+    .top-navbar{
         position: relative;
     }
-
-    .top-navbar .navbar-brand {
+    .top-navbar .navbar-brand{
         width: 100%;
     }
+    
 
     .navbar-side {
         z-index: 1;
@@ -601,16 +610,11 @@ ul.nav.nav-second-level.collapse.in {
         position: relative;
         top: 0;
     }
-
-    .navbar {
-        border-radius: 0px;
-    }
-
     #page-wrapper {
         margin: 0;
-        top: 0;
         padding: 15px 30px;
+        top: 0;
     }
-
 }
+
 
