@@ -392,3 +392,29 @@ ReactDOM.render(
     </Switch>
 </div>
 ```
+# 6-2 通用布局的开发(1)
+##### webpack配置
+- 处理别名webpack配置
+```
+resolve: {
+    alias: {
+        page: path.resolve(__dirname, 'src/page')
+    }
+},
+```
+- 处理默认访问地址
+```
+devServer: {
+    port: 2300,
+    historyApiFallback: {
+        index: '/dist/index.html'
+    }
+}
+```
+- 省略后缀.jsx
+```
+resolve: {
+    extensions: ['.jsx', '.js', '.json', '.scss'],
+    ....
+},
+```

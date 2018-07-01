@@ -10,6 +10,13 @@ module.exports = {
         publicPath: '/dist/',
         filename: 'js/app.js'
     },
+    resolve: {
+        extensions: ['.jsx', '.js', '.json', '.scss'],
+        alias: {
+            page: path.resolve(__dirname, 'src/page'),
+            component: path.resolve(__dirname, 'src/component')
+        }
+    },
     module: {
         rules: [
             // 处理react文件
@@ -81,6 +88,9 @@ module.exports = {
         })
     ],
     devServer: {
-        port: 2300
+        port: 2300,
+        historyApiFallback: {
+            index: '/dist/index.html'
+        }
     }
 };
