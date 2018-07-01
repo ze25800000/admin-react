@@ -48,7 +48,7 @@ export default class SideNav extends Component {
                                 </ul>
                             </li>
                             <li className={'active'}>
-                                <Link to="/user" activeClassName={'active-menu'}>
+                                <Link to="/user" >
                                     <i className="fa fa-sitemap"></i>
                                     用户
                                     <span className="fa arrow"></span>

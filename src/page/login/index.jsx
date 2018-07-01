@@ -1,14 +1,20 @@
 import React, {Component} from 'react'
 import './index.scss'
 import User from 'service/user-service'
+import _mm from 'util/mm'
 
 export default class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            redirect: _mm.getUrlParam('redirect') || '/'
         }
+    }
+
+    componentWillMount() {
+        document.title = '登录 - MMALL ADMIN'
     }
 
     onInputChange(e) {
@@ -20,12 +26,28 @@ export default class Login extends Component {
         })
     }
 
+    onInputKeyup(e) {
+        if (e.keyCode === 13) {
+            this.onSubmit()
+        }
+    }
+
     async onSubmit(e) {
-        let result = await User.login({
-            username: this.state.username,
-            password: this.state.password
-        })
-        console.log(result)
+        let loginInfo = {
+                username: this.state.username,
+                password: this.state.password
+            },
+            checkResult = User.checkLoginInfo(loginInfo)
+        if (!checkResult.status) {
+            _mm.errorTips(checkResult.msg)
+            return
+        }
+        try {
+            let result = await User.login(loginInfo)
+            this.props.history.push(this.state.redirect)
+        } catch (e) {
+            _mm.errorTips(e)
+        }
     }
 
     render() {
@@ -39,12 +61,14 @@ export default class Login extends Component {
                                 <input type="text" className="form-control"
                                        placeholder="用户名"
                                        name={'username'}
+                                       onKeyUp={e => this.onInputKeyup(e)}
                                        onChange={e => this.onInputChange(e)}
                                 />
                             </div>
                             <div className="form-group">
                                 <input type="password" className="form-control"
                                        name={'password'}
+                                       onKeyUp={e => this.onInputKeyup(e)}
                                        placeholder="密码"
                                        onChange={e => this.onInputChange(e)}
                                 />
